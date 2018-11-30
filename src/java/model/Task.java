@@ -6,10 +6,12 @@
 package model;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -23,6 +25,14 @@ public class Task implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @ManyToOne
+    @Column(nullable = false)
+    private Todo todo;
+
+    private String description;
+
+    private boolean done;
+
     public Long getId() {
         return id;
     }
@@ -30,6 +40,14 @@ public class Task implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public Task(Long id, Todo todo, String description, boolean done) {
+        this.id = id;
+        this.todo = todo;
+        this.description = description;
+        this.done = done;
+    }
+    
 
     @Override
     public int hashCode() {
@@ -55,5 +73,29 @@ public class Task implements Serializable {
     public String toString() {
         return "model.Task[ id=" + id + " ]";
     }
-    
+
+    public Todo getTodo() {
+        return todo;
+    }
+
+    public void setTodo(Todo todo) {
+        this.todo = todo;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
+    }
+
 }

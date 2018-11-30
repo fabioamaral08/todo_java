@@ -6,11 +6,16 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -19,16 +24,25 @@ import javax.persistence.Id;
 @Entity
 public class Todo implements Serializable {
 
+    @OneToMany(mappedBy = "todo")
+    private List<Task> tasks;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
+    @ManyToOne
+    @Column(nullable = false)
     private Users owner;
-    
+
     private int priority;
-    
-    private List task;
+
+    private String cat;
+
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date deadline;
+
     public Long getId() {
         return id;
     }
@@ -42,6 +56,15 @@ public class Todo implements Serializable {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
         return hash;
+    }
+
+    public Todo(List<Task> tasks, Long id, Users owner, int priority, String cat, Date deadline) {
+        this.tasks = tasks;
+        this.id = id;
+        this.owner = owner;
+        this.priority = priority;
+        this.cat = cat;
+        this.deadline = deadline;
     }
 
     @Override
@@ -61,5 +84,45 @@ public class Todo implements Serializable {
     public String toString() {
         return "model.Todo[ id=" + id + " ]";
     }
-    
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public Users getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Users owner) {
+        this.owner = owner;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
+    public String getCat() {
+        return cat;
+    }
+
+    public void setCat(String cat) {
+        this.cat = cat;
+    }
+
+    public Date getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(Date deadline) {
+        this.deadline = deadline;
+    }
+
 }
