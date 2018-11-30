@@ -1,0 +1,103 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 30/11/2018, 15:42:37
+    Author     : Gi
+*/
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial;
+    margin: 0;
+    border: 0;
+}
+
+.header {
+    padding: 20px;
+    text-align: center;
+    background: #1abc9c;
+    color: white;
+}
+
+.footer {
+    padding: 10px;
+    text-align: center;
+    background: #1abc9c;
+    color: white;
+    margin-bottom: 0px;
+}
+
+.navbar {
+    display: flex;
+    align-content: right;
+    background-color: #333;
+}
+
+.navbar a {
+    color: white;
+    padding: 14px 20px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.row {  
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.main {
+    flex: 70%;
+    background-color: white;
+    padding: 20px;
+}
+
+
+
+
+
+.page { 
+    display: flex; 
+    flex-direction: row; 
+    justify-content: center; 
+    align-items: center; 
+    background: white;
+    margin-bottom: 1em;
+}
+
+form { 
+    display: flex; 
+    flex-direction: column; 
+    flex: 0 0 auto; 
+
+    border: 1px solid; 
+    border-radius: 5px;
+    padding: 15px;
+    background: lightblue; 
+}
+form label, form button {
+    margin-top: 15px;
+}
+form label {
+    font-size: 20px;
+}
+form input {
+    flex: 1 1 auto;
+    font-size: 20px;
+}
+
+button {
+    padding: 1em;
+    font-size: 1em;  
+}
