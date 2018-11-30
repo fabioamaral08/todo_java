@@ -13,6 +13,7 @@
     </head>
 
     <body>
+
         <div class="header">
             <h1>To Do List</h1>   
         </div> 
@@ -34,6 +35,5 @@
         <div class="footer">
             Trabalho de Java
         </div>
-
     </body>
 </html>
