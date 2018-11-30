@@ -16,7 +16,7 @@
                 welcome page and also update the welcome-file setting in</i>
             <tt>web.xml</tt>.</p>
         
-        <form action="Teste">
+        <form action="Cadastro">
             <input type="submit">
         </form>
     </body>
