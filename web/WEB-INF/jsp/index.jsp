@@ -4,20 +4,36 @@
 
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Welcome to Spring Web MVC project</title>
+        <title>To Do List</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale = 1">
+        <style>
+            @import url("css/style.css");
+        </style>
     </head>
 
     <body>
-        <p>Hello! This is the default welcome page for a Spring Web MVC project.</p>
-        <p><i>To display a different welcome page for this project, modify</i>
-            <tt>index.jsp</tt> <i>, or create your own welcome page then change
-                the redirection in</i> <tt>redirect.jsp</tt> <i>to point to the new
-                welcome page and also update the welcome-file setting in</i>
-            <tt>web.xml</tt>.</p>
-        
-        <form action="Cadastro">
-            <input type="submit">
-        </form>
+
+        <div class="header">
+            <h1>To Do List</h1>   
+        </div> 
+        <jsp:include page="menu.jsp" />
+
+        <% String pag = (String) request.getAttribute("page");
+            if (pag.equals("home")) { %>
+        <jsp:include page="list_todo.jsp" />
+        <% } else if (pag.equals("logout")) { %>
+        <jsp:include page="logout.jsp" />
+        <% } else if (pag.equals("new_user")) { %>
+        <jsp:include page="new_user.jsp" />
+        <% } else { %>
+        <jsp:include page="login.jsp" />
+        <% }%>
+
+
+
+        <div class="footer">
+            Trabalho de Java
+        </div>
     </body>
 </html>
