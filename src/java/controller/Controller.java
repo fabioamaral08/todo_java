@@ -17,8 +17,8 @@ import persist.UserPersist;
  */
 public class Controller {
 
-    private UserPersist up;
-    private TodoPersist tp;
+    private UserPersist up = new UserPersist();
+    private TodoPersist tp = new TodoPersist();
 
     public boolean userPersist(Users user) {
         return user.persist();
@@ -27,15 +27,15 @@ public class Controller {
     public Users login(String login, String password) {
         return up.verifyUser(login, password);
     }
-    
-    public List allToDos(String idUser){
+
+    public List allToDos(String idUser) {
         return tp.getAll(idUser);
     }
-    
-    public Todo getTodo(String id){
+
+    public Todo getTodo(String id) {
         return tp.getTodo(id);
     }
-    
+
 //    public boolean deleteTOdo(String idTodo){
 //        return tp.deleteTodo(idTodo);
 //    }

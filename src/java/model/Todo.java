@@ -6,6 +6,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
@@ -33,7 +34,6 @@ public class Todo implements Serializable {
     private Long id;
 
     @ManyToOne
-    @Column(nullable = false)
     private Users owner;
 
     private int priority;
@@ -58,13 +58,8 @@ public class Todo implements Serializable {
         return hash;
     }
 
-    public Todo(List<Task> tasks, Long id, Users owner, int priority, String cat, Date deadline) {
-        this.tasks = tasks;
-        this.id = id;
-        this.owner = owner;
-        this.priority = priority;
-        this.cat = cat;
-        this.deadline = deadline;
+    public Todo() {
+        this.tasks = new ArrayList();
     }
 
     @Override

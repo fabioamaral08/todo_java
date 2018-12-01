@@ -26,7 +26,6 @@ public class Task implements Serializable {
     private Long id;
 
     @ManyToOne
-    @Column(nullable = false)
     private Todo todo;
 
     private String description;
@@ -41,11 +40,8 @@ public class Task implements Serializable {
         this.id = id;
     }
 
-    public Task(Long id, Todo todo, String description, boolean done) {
-        this.id = id;
-        this.todo = todo;
-        this.description = description;
-        this.done = done;
+    public Task() {
+
     }
     
 

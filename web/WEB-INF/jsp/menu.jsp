@@ -9,9 +9,9 @@
 <div class="navbar">
     <% if (session.getAttribute("user") == null) { %>
     <a href="index">Home</a>
-    <a href="login">Login</a>
+    <a href="Login">Login</a>
     <% } else {%>
-    <a href="login">Logout</a>
+    <a href="Login">Logout</a>
     <% } %>
 
 

@@ -5,7 +5,6 @@
  */
 package persist;
 
-import static com.mchange.v2.c3p0.impl.C3P0Defaults.user;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,8 +38,8 @@ public class TodoPersist {
 
     public List getAll(String idUser) {
         EntityManager em = emf.createEntityManager();
-        Query q = em.createQuery("SELECT * FROM todos WHERE user = :idUser");
-        q.setParameter("iduser", idUser);
+        Query q = em.createQuery("SELECT td FROM Todo td WHERE owner_id = :idUser");
+        q.setParameter("idUser", idUser);
         List result = null;
         try {
             em.getTransaction().begin();

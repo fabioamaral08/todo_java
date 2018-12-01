@@ -6,6 +6,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,12 +43,8 @@ public class Users implements Serializable {
     
     private String password;
 
-    public Users(List<Todo> todos, Long id, String nome, String login, String password) {
-        this.todos = todos;
-        this.id = id;
-        this.nome = nome;
-        this.login = login;
-        this.password = password;
+    public Users() {
+        this.todos = new ArrayList();
     }
 
     public Long getId() {

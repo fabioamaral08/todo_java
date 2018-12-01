@@ -5,13 +5,16 @@
  */
 package servlets;
 
+import controller.Controller;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Users;
 
 /**
  *
@@ -62,7 +65,7 @@ public class Login extends HttpServlet {
             s.invalidate();
         } 
         request.setAttribute("page", "login");
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        request.getRequestDispatcher("index.htm").forward(request, response);
     }
 
     /**
@@ -78,15 +81,17 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         Controller c = new Controller();
 
-        u = c.login(request.getParameter("name"), request.getParameter("password"));
+        Users u = c.login(request.getParameter("login"), request.getParameter("password"));
         if (u == null) {
             request.setAttribute("page", "error_login");
             request.getRequestDispatcher("error.jsp").forward(request, response);
         } else {
             request.setAttribute("page", "home");
             HttpSession hs = request.getSession(true);
+            List allTodo = c.allToDos(Long.toString(u.getId()));
+            request.setAttribute("list_todo", allTodo);
             hs.setAttribute("user", u);
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            request.getRequestDispatcher("index.htm").forward(request, response);
         }
     }
 }

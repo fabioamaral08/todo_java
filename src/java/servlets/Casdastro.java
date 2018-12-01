@@ -5,8 +5,8 @@
  */
 package servlets;
 
+import controller.Controller;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,14 +29,17 @@ public class Casdastro extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Controller c = new Controller();
         String login = request.getParameter("login");
         String name = request.getParameter("name");
         String password = request.getParameter("password");
         
-        Users user = new Users(login, password, name);
+        Users user = new Users();
+        user.setLogin(login);
+        user.setNome(name);
+        user.setPassword(password);
         if (c.userPersist(user)) {
             request.setAttribute("page", "home");
             request.getRequestDispatcher("index.jsp").forward(request, response);

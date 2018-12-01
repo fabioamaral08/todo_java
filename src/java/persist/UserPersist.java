@@ -44,7 +44,7 @@ public class UserPersist {
     
     public Users verifyUser(String login, String password){
         EntityManager em = emf.createEntityManager();
-        Query q = em.createQuery("SELECT * FROM users WHERE login = :login AND password = :password");
+        Query q = em.createQuery("SELECT u FROM Users u WHERE login = :login AND password = :password");
         q.setParameter("password", password);
         q.setParameter("login", login);
         Users user = null;
