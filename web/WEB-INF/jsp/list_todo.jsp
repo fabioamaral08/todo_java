@@ -4,6 +4,8 @@
     Author     : Gi
 --%>
 
+<%@page import="model.Users"%>
+<%@page import="model.Todo"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -17,9 +19,8 @@
             <th>Ações</th>
         </tr>
         <tr>
-            <% ArrayList<Todo> todo_list = (ArrayList) request.getAttribute("todo_list"); %>
+            <% ArrayList<Todo> todo_list = (ArrayList) request.getAttribute("list_todo"); %>
             <% for (Todo t : todo_list) {%>
-            <td> <%= t.getName()%></td>
             <td> <%= t.getCat()%></td>
             <td> <%= t.getPriority()%></td>
             <td> <a href=<%= "view_todo?Todo_ID=" + t.getId()%>>Ver detalhes</a>

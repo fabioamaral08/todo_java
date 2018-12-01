@@ -6,11 +6,11 @@
 
 <%@page contentType="text/html" pageEncoding="windows-1252"%>
 <div class="page">
-    <form method="POST" action="login">
+    <form method="POST" action="Login">
         <label>Email</label>
-        <input type="email" name="email" required>
+        <input type="email" name="login" required>
         <label>Senha</label>
-        <input type="password" name="senha" required>
+        <input type="password" name="password" required>
         <button>Login</button>
     </form>
 </div>

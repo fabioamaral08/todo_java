@@ -20,7 +20,9 @@
         <jsp:include page="menu.jsp" />
 
         <% String pag = (String) request.getAttribute("page");
-            if (pag.equals("home")) { %>
+            if (pag == null) {%>
+        <jsp:include page="login.jsp" />
+        <% } else if (pag.equals("home")) { %>
         <jsp:include page="list_todo.jsp" />
         <% } else if (pag.equals("logout")) { %>
         <jsp:include page="logout.jsp" />
