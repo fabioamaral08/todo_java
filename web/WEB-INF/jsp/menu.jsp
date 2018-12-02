@@ -8,11 +8,15 @@
 <!DOCTYPE html>
 <div class="navbar">
     <% if (session.getAttribute("user") == null) { %>
-    <a href="index">Home</a>
+    <a href="Login">Home</a>
     <a href="Login">Login</a>
+    <a href="Cadastro">Cadastrar</a>
     <% } else {%>
+    <a href="Login">Home</a>
+    <a href="CreateTodo">Criar Tarefas</a>
+    <a href="CreateTodo">Buscar Tarefas</a>
     <a href="Login">Logout</a>
-    <% } %>
+    <% }%>
 
 
 

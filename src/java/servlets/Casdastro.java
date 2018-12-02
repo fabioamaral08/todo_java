@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.Users;
 
 /**
@@ -42,10 +43,17 @@ public class Casdastro extends HttpServlet {
         user.setPassword(password);
         if (c.userPersist(user)) {
             request.setAttribute("page", "home");
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            request.getRequestDispatcher("index.htm").forward(request, response);
         } else {
             request.setAttribute("page", "error_signup");
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
+    }
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
+        request.setAttribute("page", "new_user");
+        request.getRequestDispatcher("index.htm").forward(request, response);
     }
 }
