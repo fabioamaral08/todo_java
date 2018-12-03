@@ -5,7 +5,6 @@
  */
 package persist;
 
-import com.mysql.jdbc.Statement;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,9 +39,8 @@ public class UserPersist {
         }
         return commited;
     }
-    
-    
-    public Users verifyUser(String login, String password){
+
+    public Users verifyUser(String login, String password) {
         EntityManager em = emf.createEntityManager();
         Query q = em.createQuery("SELECT u FROM Users u WHERE login = :login AND password = :password");
         q.setParameter("password", password);
@@ -53,7 +51,7 @@ public class UserPersist {
             em.getTransaction().begin();
             result = q.getResultList();
             em.getTransaction().commit();
-            if(result.size() > 0){
+            if (result.size() > 0) {
                 user = (Users) result.get(0);
             }
         } catch (Exception e) {

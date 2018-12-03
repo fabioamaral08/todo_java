@@ -8,11 +8,15 @@ package model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import persist.UserPersist;
 
@@ -23,7 +27,12 @@ import persist.UserPersist;
 @Entity
 public class Users implements Serializable {
 
-    @OneToMany(mappedBy = "owner")
+    @ElementCollection
+    @CollectionTable(
+            name = "todo",
+            joinColumns = @JoinColumn(name = "owner_id")
+    )
+    @OneToMany(mappedBy = "owner", cascade = {CascadeType.ALL, CascadeType.MERGE, CascadeType.PERSIST})
     private List<Todo> todos;
 
     private static final long serialVersionUID = 1L;
@@ -32,15 +41,14 @@ public class Users implements Serializable {
     private Long id;
 
     @Column(nullable = false)
-    private String nome;
+    private String name;
 
     @Column(unique = true, nullable = false)
-    
+
     private String login;
-    
+
     @Column(nullable = false)
-    
-    
+
     private String password;
 
     public Users() {
@@ -88,12 +96,12 @@ public class Users implements Serializable {
         this.todos = todos;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getLogin() {
@@ -111,8 +119,8 @@ public class Users implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    public boolean persist(){
+
+    public boolean persist() {
         return new UserPersist().persist(this);
     }
 
