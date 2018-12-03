@@ -6,6 +6,7 @@
 package controller;
 
 import java.util.List;
+import model.Task;
 import model.Todo;
 import model.Users;
 import persist.TodoPersist;
@@ -36,7 +37,11 @@ public class Controller {
         return tp.getTodo(id);
     }
 
-//    public boolean deleteTOdo(String idTodo){
-//        return tp.deleteTodo(idTodo);
-//    }
+    public boolean todoPersist(Todo todo){
+        return tp.persist(todo);
+    }
+    
+    public boolean addTask(Task task){
+        return tp.addTask(task);
+    }
 }
