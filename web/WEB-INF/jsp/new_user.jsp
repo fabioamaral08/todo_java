@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <div class="page">
-    <form method="POST" action="Cadastro">
+    <form class="form" method="POST" action="Cadastro">
         <label>Nome</label>
         <input type="text" name="name" required>
         <label>Email</label>

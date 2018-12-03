@@ -65,18 +65,26 @@ body {
     flex: 70%;
     background-color: white;
     padding: 20px;
-}
+}  
 
+.new_todo{
+    display: flex; 
+    flex-direction: column; 
+    border-radius: 5px;
+    padding: 2em;
+    background: #ddd;
+    margin: 3em;
+}
 
 .page { 
     display: flex; 
     flex-direction: row; 
     justify-content: center; 
     align-items: center; 
-    padding: 3em;
+    padding: 5em;
 }
 
-form { 
+.form { 
     display: flex; 
     flex-direction: column; 
     flex: 0 0 auto; 
@@ -91,7 +99,7 @@ form label, form button {
 form label {
     font-size: 20px;
 }
-form input {
+form input, select {
     flex: 1 1 auto;
     font-size: 20px;
     border-radius: 5px;
@@ -103,4 +111,27 @@ button {
     font-size: 20px;
     color: white;
     background-color: #333;
+}
+
+#customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
 }
