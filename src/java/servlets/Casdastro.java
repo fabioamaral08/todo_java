@@ -20,7 +20,6 @@ import model.Users;
  */
 public class Casdastro extends HttpServlet {
 
-
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -36,12 +35,15 @@ public class Casdastro extends HttpServlet {
         String login = request.getParameter("login");
         String name = request.getParameter("name");
         String password = request.getParameter("password");
-        
+
         Users user = new Users();
         user.setLogin(login);
         user.setName(name);
         user.setPassword(password);
+        request.setAttribute("list_todo", user.getTodos());
         if (c.userPersist(user)) {
+            HttpSession session = request.getSession(true);
+            session.setAttribute("user", user);
             request.setAttribute("page", "home");
             request.getRequestDispatcher("index.htm").forward(request, response);
         } else {
@@ -49,9 +51,9 @@ public class Casdastro extends HttpServlet {
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
-    
+
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         request.setAttribute("page", "new_user");
         request.getRequestDispatcher("index.htm").forward(request, response);
