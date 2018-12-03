@@ -39,7 +39,7 @@ public class Casdastro extends HttpServlet {
         
         Users user = new Users();
         user.setLogin(login);
-        user.setNome(name);
+        user.setName(name);
         user.setPassword(password);
         if (c.userPersist(user)) {
             request.setAttribute("page", "home");

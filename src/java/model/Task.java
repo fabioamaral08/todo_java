@@ -6,11 +6,12 @@
 package model;
 
 import java.io.Serializable;
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 /**
@@ -25,7 +26,8 @@ public class Task implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
     private Todo todo;
 
     private String description;
@@ -43,7 +45,6 @@ public class Task implements Serializable {
     public Task() {
 
     }
-    
 
     @Override
     public int hashCode() {

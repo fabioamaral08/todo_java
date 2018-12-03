@@ -9,11 +9,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -25,7 +29,12 @@ import javax.persistence.Temporal;
 @Entity
 public class Todo implements Serializable {
 
-    @OneToMany(mappedBy = "todo")
+    @ElementCollection
+    @CollectionTable(
+            name = "task",
+            joinColumns = @JoinColumn(name = "todo_id")
+    )
+    @OneToMany(mappedBy = "todo", cascade = {CascadeType.ALL, CascadeType.MERGE, CascadeType.PERSIST})
     private List<Task> tasks;
 
     private static final long serialVersionUID = 1L;
@@ -33,12 +42,15 @@ public class Todo implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
     private Users owner;
 
     private int priority;
 
     private String cat;
+
+    private String name;
 
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date deadline;
@@ -118,6 +130,14 @@ public class Todo implements Serializable {
 
     public void setDeadline(Date deadline) {
         this.deadline = deadline;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
 }

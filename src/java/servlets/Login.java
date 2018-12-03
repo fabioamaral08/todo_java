@@ -63,7 +63,7 @@ public class Login extends HttpServlet {
         HttpSession s = request.getSession();
         if (s.getAttribute("user") != null) {
             s.invalidate();
-        } 
+        }
         request.setAttribute("page", "login");
         request.getRequestDispatcher("index.htm").forward(request, response);
     }
