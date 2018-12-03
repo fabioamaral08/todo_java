@@ -28,8 +28,10 @@
         <jsp:include page="logout.jsp" />
         <% } else if (pag.equals("new_user")) { %>
         <jsp:include page="new_user.jsp" />
-        <% } else if (pag.equals("new_task")) { %>
-        <jsp:include page="new_task.jsp" />
+        <% } else if (pag.equals("new_todo")) { %>
+        <jsp:include page="new_todo.jsp" />
+        <% } else if (pag.equals("view_todo")) { %>
+        <jsp:include page="new_todo.jsp" />
         <% } else { %>
         <jsp:include page="login.jsp" />
         <% }%>

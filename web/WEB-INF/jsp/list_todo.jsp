@@ -9,24 +9,22 @@
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<div class="table"> 
-    <table style="width:100%">
+<table id="customers">
 
-        <tr>
-            <th>Nome</th>
-            <th>Categoria</th> 
-            <th>Prioridade</th>
-            <th>Ações</th>
-        </tr>
-        <tr>
-            <% ArrayList<Todo> todo_list = (ArrayList) request.getAttribute("list_todo"); %>
-            <% for (Todo t : todo_list) {%>
-            <td> <%= t.getCat()%></td>
-            <td> <%= t.getPriority()%></td>
-            <td> <a href=<%= "view_todo?Todo_ID=" + t.getId()%>>Ver detalhes</a>
-                <a href=<%= "excluir?Todo_ID=" + t.getId()%>>Ver detalhes</a></td>
-                <% }%>
-        </tr>
+    <tr>
+        <th>Nome</th>
+        <th>Categoria</th> 
+        <th>Prioridade</th>
+        <th>Ações</th>
+    </tr>
+    <tr>
+        <% ArrayList<Todo> todo_list = (ArrayList) request.getAttribute("list_todo"); %>
+        <% for (Todo t : todo_list) {%>
+        <td> <%= t.getCat()%></td>
+        <td> <%= t.getPriority()%></td>
+        <td> <a href=<%= "view_todo?Todo_ID=" + t.getId()%>>Ver detalhes</a>
+            <a href=<%= "excluir?Todo_ID=" + t.getId()%>>Ver detalhes</a></td>
+            <% }%>
+    </tr>
 
-    </table>
-</div>
+</table>

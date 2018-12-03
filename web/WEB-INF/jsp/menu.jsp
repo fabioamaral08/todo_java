@@ -14,7 +14,6 @@
     <% } else {%>
     <a href="Login">Home</a>
     <a href="CreateTodo">Criar Tarefas</a>
-    <a href="CreateTodo">Buscar Tarefas</a>
     <a href="Login">Logout</a>
     <% }%>
 
