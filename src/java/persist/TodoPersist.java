@@ -135,4 +135,23 @@ public class TodoPersist {
         return commited;
     }
 
+    public List getTasks(String id_todo) {
+        EntityManager em = emf.createEntityManager();
+        Query q = em.createQuery("SELECT t FROM Task t WHERE todo_id = :idTodo");
+        q.setParameter("idTodo", id_todo);
+        List result = new ArrayList();
+        try {
+            em.getTransaction().begin();
+            result.addAll(q.getResultList());
+            em.getTransaction().commit();
+
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", e);
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
+        return result;
+    }
+
 }
