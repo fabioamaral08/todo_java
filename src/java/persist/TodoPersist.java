@@ -153,5 +153,39 @@ public class TodoPersist {
         }
         return result;
     }
+    
+    public void updateTask(String idTask){
+        EntityManager em = emf.createEntityManager();
+        Query q = em.createQuery("UPDATE Task t SET done = true WHERE id = :idTask");
+        q.setParameter("idTask", idTask);
+        try {
+            em.getTransaction().begin();
+            q.executeUpdate();
+            em.getTransaction().commit();
+
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", e);
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
+    }
+    
+    public void deleteTask(String idTask){
+        EntityManager em = emf.createEntityManager();
+        Query q = em.createQuery("DELETE FROM Task WHERE id = :idTask");
+        q.setParameter("idTask", idTask);
+        try {
+            em.getTransaction().begin();
+            q.executeUpdate();
+            em.getTransaction().commit();
+
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", e);
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
+    }
 
 }
