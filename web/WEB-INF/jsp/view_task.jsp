@@ -4,6 +4,9 @@
     Author     : Gi
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.DateFormat"%>
+<%@page import="java.util.Date"%>
 <%@page import="model.Todo"%>
 <%@page import="model.Task"%>
 <%@page import="java.util.ArrayList"%>
@@ -11,10 +14,12 @@
 <!DOCTYPE html>
 <div class="page">
     <% Todo t = (Todo) request.getAttribute("todo");%>
+    <% DateFormat df = new SimpleDateFormat("dd/MM/yyyy"); %>
+
     <h1> <%= t.getName()%> </h1>
     <h3> <%= t.getCat()%> </h3>
     <h3> <%= t.getPriority()%> </h3>
-    <h3> <%= t.getDeadline()%> </h3>
+    <h3> <%= df.format((Date) t.getDeadline()) %> </h3>
 
     <form action="update_tasks" method="POST">
         <div class="table"> 
@@ -34,7 +39,7 @@
                         <%} else {%>
                     <td> <input type="checkbox" name= <%= "check" + i%>></td>    
                         <% }%>
-                    <% }%>
+                        <% }%>
                 </tr>
 
             </table>
