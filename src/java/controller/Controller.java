@@ -52,4 +52,12 @@ public class Controller {
     public List allTasks(String id_todo){
         return tp.getTasks(id_todo);
     }
+    
+    public void updateTask(String idTask){
+        tp.updateTask(idTask);
+    }
+    
+    public void deleteTask(String idTask){
+        tp.deleteTask(idTask);
+    }
 }
