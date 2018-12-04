@@ -54,10 +54,10 @@ public class Controller {
     }
     
     public void updateTask(String idTask){
-        tp.updateTask(idTask);
+        tp.updateTask(Long.parseLong(idTask));
     }
     
     public void deleteTask(String idTask){
-        tp.deleteTask(idTask);
+        tp.deleteTask(Long.parseLong(idTask));
     }
 }

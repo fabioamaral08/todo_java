@@ -154,7 +154,7 @@ public class TodoPersist {
         return result;
     }
     
-    public void updateTask(String idTask){
+    public void updateTask(Long idTask){
         EntityManager em = emf.createEntityManager();
         Query q = em.createQuery("UPDATE Task t SET done = true WHERE id = :idTask");
         q.setParameter("idTask", idTask);
@@ -171,7 +171,7 @@ public class TodoPersist {
         }
     }
     
-    public void deleteTask(String idTask){
+    public void deleteTask(Long idTask){
         EntityManager em = emf.createEntityManager();
         Query q = em.createQuery("DELETE FROM Task WHERE id = :idTask");
         q.setParameter("idTask", idTask);

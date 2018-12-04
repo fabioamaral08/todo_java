@@ -8,6 +8,7 @@ package servlets;
 import controller.Controller;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -86,6 +87,8 @@ public class Add_Task extends HttpServlet {
         task.setTodo(todo);
 
         if (c.addTask(task)) {
+            List<Task> tasks = c.allTasks(id);
+            request.setAttribute("tasks", tasks);
             request.setAttribute("page", "view_todo");
             request.setAttribute("todo", todo);
             request.getRequestDispatcher("index.htm").forward(request, response);
