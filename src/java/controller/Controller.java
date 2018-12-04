@@ -48,4 +48,8 @@ public class Controller {
     public boolean deleteTodo(Todo todo){
         return tp.deleteTodo(todo);
     }
+    
+    public List allTasks(String id_todo){
+        return tp.getTasks(id_todo);
+    }
 }
