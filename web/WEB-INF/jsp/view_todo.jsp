@@ -10,7 +10,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <% Todo t = (Todo) request.getAttribute("todo");%>
-<form action="">
+<form method="POST" action="Update_Task">
+    <h1> <%= t.getName()%> </h1>
     <h3> <%= t.getCat()%> </h3>
     <h3> <%= t.getPriority()%> </h3>
     <h3> <%= t.getDeadline()%> </h3>
@@ -20,14 +21,14 @@
             <th>Situação</th> 
         </tr>
         <tr>
-            <% ArrayList<Task> tasks = (ArrayList) t.getTasks();
+            <% ArrayList<Task> tasks = (ArrayList) request.getAttribute("tasks");
                 int i = 0; %>
             <% for (Task task : tasks) {%>
             <td> <%= task.getDescription()%></td>
             <% if (task.isDone()) {%>
-            <td> <input type="checkbox" checked="true" disabled="true" name=<%= "check" + i%> ></td>
+            <td> <input type="checkbox" checked="true" name="check" value=<%= task.getId() %> ></td>
                 <% } else {%>
-            <td> <input type="checkbox" name= <%= "check" + i%> ></td>                
+            <td> <input type="checkbox" name="check" value="<%= task.getId() %>" ></td>                
                 <% }%>
                 <% }%>
         </tr>
@@ -35,8 +36,9 @@
     </table>
     <button>Atualizar</button>
 </form>
-<form class="new_todo" name="form2" method="POST" action="AddTask">
+<form class="new_todo" method="POST" action="Add_Task">
     <label>Tarefas</label>
-    <input type="text" name="task">    
+    <input type="hidden" name="id_todo" value="<%= t.getId()%>">
+    <input type="text" name="desc">    
     <button> Adicionar Tarefa </button>            
 </form>

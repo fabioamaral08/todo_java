@@ -36,6 +36,14 @@
         <servlet-name>Delete_Todo</servlet-name>
         <servlet-class>servlets.Delete_Todo</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Add_Task</servlet-name>
+        <servlet-class>servlets.Add_Task</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Update_Task</servlet-name>
+        <servlet-class>servlets.Update_Task</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.htm</url-pattern>
@@ -63,6 +71,14 @@
     <servlet-mapping>
         <servlet-name>Delete_Todo</servlet-name>
         <url-pattern>/Delete_Todo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Add_Task</servlet-name>
+        <url-pattern>/Add_Task</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Update_Task</servlet-name>
+        <url-pattern>/Update_Task</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
