@@ -8,10 +8,13 @@ package servlets;
 import controller.Controller;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Task;
+import model.Todo;
 
 /**
  *
@@ -36,7 +39,7 @@ public class Update_Task extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Update_Task</title>");            
+            out.println("<title>Servlet Update_Task</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet Update_Task at " + request.getContextPath() + "</h1>");
@@ -57,7 +60,19 @@ public class Update_Task extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        Controller c = new Controller();
+        String id = request.getParameter("Task_ID");
+        String idTodo = request.getParameter("Todo_ID");
+        Todo todo = c.getTodo(idTodo);
+        List<Task> tasks = c.allTasks(idTodo);
+
+        c.deleteTask(id);
+        
+        request.setAttribute("tasks", tasks);
+        request.setAttribute("todo", todo);
+        request.setAttribute("page", "view_todo");
+        request.getRequestDispatcher("index.htm").forward(request, response);
+
     }
 
     /**
@@ -71,15 +86,24 @@ public class Update_Task extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String[] checks = request.getParameterValues("check");
         Controller c = new Controller();
         
-        for (String check: checks){
+        String[] checks = request.getParameterValues("check");
+        String idTodo = request.getParameter("id_todo");
+        Todo todo = c.getTodo(idTodo);
+        
+
+        for (String check : checks) {
             if (check != null) {
                 c.updateTask(check);
             }
-            
         }
+        
+        List<Task> tasks = c.allTasks(idTodo);
+        request.setAttribute("tasks", tasks);
+        request.setAttribute("todo", todo);
+        request.setAttribute("page", "view_todo");
+        request.getRequestDispatcher("index.htm").forward(request, response);
     }
 
     /**
