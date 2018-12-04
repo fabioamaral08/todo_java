@@ -12,7 +12,7 @@
     <a href="Login">Login</a>
     <a href="Cadastro">Cadastrar</a>
     <% } else {%>
-    <a href="Login">Home</a>
+    <a href="Home">Home</a>
     <a href="CreateTodo">Criar Tarefas</a>
     <a href="Login">Logout</a>
     <% }%>

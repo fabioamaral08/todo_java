@@ -31,7 +31,7 @@
         <% } else if (pag.equals("new_todo")) { %>
         <jsp:include page="new_todo.jsp" />
         <% } else if (pag.equals("view_todo")) { %>
-        <jsp:include page="new_todo.jsp" />
+        <jsp:include page="view_todo.jsp" />
         <% } else { %>
         <jsp:include page="login.jsp" />
         <% }%>

@@ -16,7 +16,7 @@
     <h3> <%= t.getPriority()%> </h3>
     <h3> <%= t.getDeadline()%> </h3>
 
-    <form action="update_tasks">
+    <form action="update_tasks" method="POST">
         <div class="table"> 
             <table style="width:100%">
 
@@ -29,15 +29,16 @@
                         int i = 0; %>
                     <% for (Task task : tasks) {%>
                     <td> <%= task.getDescription()%></td>
-                    <% if (task.isDone()) {%>
-                    <td> <input type="checkbox" checked="true" disabled="true" name=<%= "check" + i%> ></td>
-                        <% } else {%>
-                    <td> <input type="checkbox" name= <%= "check" + i%> ></td>                
+                    <%if (task.isDone()) {%>
+                    <td> <input type="checkbox" checked="true" name=<%= "check" + i%> ></td>
+                        <%} else {%>
+                    <td> <input type="checkbox" name= <%= "check" + i%>></td>    
                         <% }%>
+                    <% }%>
                 </tr>
 
             </table>
         </div>
-        <button>Salvar</button>
+        <input type="submit">
+    </form>
 </div>
-</form>
