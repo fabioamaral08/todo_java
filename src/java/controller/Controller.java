@@ -29,8 +29,8 @@ public class Controller {
         return up.verifyUser(login, password);
     }
 
-    public List allToDos(String idUser) {
-        return tp.getAll(idUser);
+    public List allToDos(Users user) {
+        return tp.getAll(user.getId().toString());
     }
 
     public Todo getTodo(String id) {
@@ -43,5 +43,9 @@ public class Controller {
     
     public boolean addTask(Task task){
         return tp.addTask(task);
+    }
+    
+    public boolean deleteTodo(Todo todo){
+        return tp.deleteTodo(todo);
     }
 }

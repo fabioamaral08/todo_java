@@ -7,19 +7,19 @@ package servlets;
 
 import controller.Controller;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Todo;
 import model.Users;
 
 /**
  *
- * @author Gustavo Gimenez
+ * @author fabio
  */
-public class Login extends HttpServlet {
+public class Delete_Todo extends HttpServlet {
 
     
 
@@ -35,12 +35,19 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession s = request.getSession();
-        if (s.getAttribute("user") != null) {
-            s.invalidate();
+        String id = request.getParameter("Todo_ID");
+        Todo todo = new Todo();
+        todo.setId(Long.parseLong(id));
+        Controller c = new Controller();
+        HttpSession session = request.getSession();
+        if(c.deleteTodo(todo)){
+            request.setAttribute("page", "home");
+            request.setAttribute("list_todo",c.allToDos((Users)session.getAttribute("user")));
+            request.getRequestDispatcher("index.htm").forward(request, response);
+        }else{
+            request.setAttribute("page", "error_deleteTodo");
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
-        request.setAttribute("page", "login");
-        request.getRequestDispatcher("index.htm").forward(request, response);
     }
 
     /**
@@ -54,19 +61,16 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Controller c = new Controller();
-
-        Users u = c.login(request.getParameter("login"), request.getParameter("password"));
-        if (u == null) {
-            request.setAttribute("page", "error_login");
-            request.getRequestDispatcher("error.jsp").forward(request, response);
-        } else {
-            request.setAttribute("page", "home");
-            HttpSession hs = request.getSession(true);
-            List allTodo = c.allToDos(u);
-            request.setAttribute("list_todo", allTodo);
-            hs.setAttribute("user", u);
-            request.getRequestDispatcher("index.htm").forward(request, response);
-        }
     }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
 }

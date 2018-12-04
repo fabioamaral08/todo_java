@@ -7,21 +7,20 @@ package servlets;
 
 import controller.Controller;
 import java.io.IOException;
-import java.util.List;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Todo;
 import model.Users;
 
 /**
  *
- * @author Gustavo Gimenez
+ * @author fabio
  */
-public class Login extends HttpServlet {
-
-    
+public class View_Todo extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -35,12 +34,14 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession s = request.getSession();
-        if (s.getAttribute("user") != null) {
-            s.invalidate();
-        }
-        request.setAttribute("page", "login");
+        String id = request.getParameter("Todo_ID");
+        Controller c = new Controller();
+        Todo todo = c.getTodo(id);
+        
+        request.setAttribute("page","view_todo");
+        request.setAttribute("todo", todo);
         request.getRequestDispatcher("index.htm").forward(request, response);
+
     }
 
     /**
@@ -54,19 +55,16 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Controller c = new Controller();
-
-        Users u = c.login(request.getParameter("login"), request.getParameter("password"));
-        if (u == null) {
-            request.setAttribute("page", "error_login");
-            request.getRequestDispatcher("error.jsp").forward(request, response);
-        } else {
-            request.setAttribute("page", "home");
-            HttpSession hs = request.getSession(true);
-            List allTodo = c.allToDos(u);
-            request.setAttribute("list_todo", allTodo);
-            hs.setAttribute("user", u);
-            request.getRequestDispatcher("index.htm").forward(request, response);
-        }
     }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
 }

@@ -7,6 +7,7 @@ package servlets;
 
 import controller.Controller;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -44,6 +45,7 @@ public class Casdastro extends HttpServlet {
         if (c.userPersist(user)) {
             HttpSession session = request.getSession(true);
             session.setAttribute("user", user);
+            request.setAttribute("list_todo", new ArrayList());
             request.setAttribute("page", "home");
             request.getRequestDispatcher("index.htm").forward(request, response);
         } else {

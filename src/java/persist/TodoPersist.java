@@ -5,6 +5,7 @@
  */
 package persist;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -45,10 +46,10 @@ public class TodoPersist {
         EntityManager em = emf.createEntityManager();
         Query q = em.createQuery("SELECT td FROM Todo td WHERE owner_id = :idUser");
         q.setParameter("idUser", idUser);
-        List result = null;
+        List result = new ArrayList();
         try {
             em.getTransaction().begin();
-            result = q.getResultList();
+            result.addAll(q.getResultList());
             em.getTransaction().commit();
 
         } catch (Exception e) {
@@ -62,18 +63,20 @@ public class TodoPersist {
 
     public Todo getTodo(String id) {
         EntityManager em = emf.createEntityManager();
-        Query q = em.createQuery("SELECT * FROM Todo WHERE Id = :idTodo");
+        Query q = em.createQuery("SELECT t FROM Todo t WHERE Id = :idTodo");
         q.setParameter("idTodo", id);
         List result;
+        ArrayList tasks = new ArrayList();
         Todo t = null;
         try {
             result = q.getResultList();
             if (result.size() > 0) {
                 t = (Todo) result.get(0);
-                q = em.createQuery("SELECT * FROM Task WHERE todo_id = :idTodo");
+                q = em.createQuery("SELECT ts FROM Task ts WHERE todo_id = :idTodo");
                 q.setParameter("idTodo", id);
                 result = q.getResultList();
-                t.setTasks(result);
+                tasks.addAll(result);
+                t.setTasks(tasks);
             }
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", e);
@@ -83,8 +86,8 @@ public class TodoPersist {
         }
         return t;
     }
-    
-    public boolean addTask(Task task){
+
+    public boolean addTask(Task task) {
         EntityManager em = emf.createEntityManager();
         boolean commited;
         try {
@@ -101,28 +104,35 @@ public class TodoPersist {
         }
         return commited;
     }
-//
-//    public boolean deleteTodo(String idTodo) {
-//        EntityManager em = emf.createEntityManager();
-//        em.remove(em);
-//        Query q = em.createQuery("SELECT * FROM todos WHERE Id = :idTodo");
-//        q.setParameter("idTodo", idTodo);
-//        List result = null;
-//        Todo t = null;
-//        try {
-//            em.getTransaction().begin();
-//            result = q.getResultList();
-//            em.getTransaction().commit();
-//            if(result.size() > 0){
-//                t = (Todo) result.get(0);
-//            }
-//        } catch (Exception e) {
-//            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", e);
-//            em.getTransaction().rollback();
-//        } finally {
-//            em.close();
-//        }
-//        return t;
-//    }
+
+    public void deleteAllTask(Todo todo) {
+        EntityManager em = this.emf.createEntityManager();
+        Query q = em.createQuery("DELETE FROM Task WHERE todo_id = :idTodo");
+        q.setParameter("idTodo", todo.getId());
+        em.getTransaction().begin();
+        q.executeUpdate();
+        em.getTransaction().commit();
+    }
+
+    public boolean deleteTodo(Todo todo) {
+        EntityManager em = emf.createEntityManager();
+        boolean commited;
+        Query q = em.createQuery("DELETE FROM Todo WHERE Id = :idTodo");
+        q.setParameter("idTodo", todo.getId());
+        try {
+            em.getTransaction().begin();
+            deleteAllTask(todo);
+            q.executeUpdate();
+            em.getTransaction().commit();
+            commited = true;
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", e);
+            em.getTransaction().rollback();
+            commited = false;
+        } finally {
+            em.close();
+        }
+        return commited;
+    }
 
 }

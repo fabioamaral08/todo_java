@@ -29,6 +29,7 @@
                 <% } else {%>
             <td> <input type="checkbox" name= <%= "check" + i%> ></td>                
                 <% }%>
+                <% }%>
         </tr>
 
     </table>

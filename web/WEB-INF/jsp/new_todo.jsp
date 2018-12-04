@@ -14,9 +14,9 @@
     <input type="text" name="cat" >
     <label>Prioridade</label>
     <select name="priority" id="priority">
-        <option value="0">Alta</option>
-        <option value="1">Média</option>
-        <option value="2">Baixa</option>
+        <option value="Alta">Alta</option>
+        <option value="Média">Média</option>
+        <option value="Baixa">Baixa</option>
     </select>     
     <label>Prazo</label>
     <input type="date" name="date">

@@ -43,10 +43,10 @@ public class Todo implements Serializable {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
+    @JoinColumn(name = "owner_id", referencedColumnName = "id")
     private Users owner;
 
-    private int priority;
+    private String priority;
 
     private String cat;
 
@@ -108,11 +108,11 @@ public class Todo implements Serializable {
         this.owner = owner;
     }
 
-    public int getPriority() {
+    public String getPriority() {
         return priority;
     }
 
-    public void setPriority(int priority) {
+    public void setPriority(String priority) {
         this.priority = priority;
     }
 

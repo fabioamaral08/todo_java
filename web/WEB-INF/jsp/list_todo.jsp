@@ -7,6 +7,8 @@
 <%@page import="model.Users"%>
 <%@page import="model.Todo"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <table id="customers">
@@ -15,16 +17,22 @@
         <th>Nome</th>
         <th>Categoria</th> 
         <th>Prioridade</th>
+        <th>Prazo</th>
         <th>Ações</th>
     </tr>
+
+    <% ArrayList<Todo> todo_list = (ArrayList) request.getAttribute("list_todo"); %>
+    <% SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy"); %>
+    <% for (Todo t : todo_list) {%>
     <tr>
-        <% ArrayList<Todo> todo_list = (ArrayList) request.getAttribute("list_todo"); %>
-        <% for (Todo t : todo_list) {%>
+        <td> <%= t.getName()%></td>
         <td> <%= t.getCat()%></td>
         <td> <%= t.getPriority()%></td>
-        <td> <a href=<%= "view_todo?Todo_ID=" + t.getId()%>>Ver detalhes</a>
-            <a href=<%= "excluir?Todo_ID=" + t.getId()%>>Ver detalhes</a></td>
-            <% }%>
+        <td> <%= df.format(t.getDeadline())%></td>
+        <td> <a href=<%= "View_Todo?Todo_ID=" + t.getId()%>>Ver detalhes</a>
+            <a href=<%= "Delete_Todo?Todo_ID=" + t.getId()%>>Excluir</a></td>
     </tr>
+    <% }%>
+
 
 </table>

@@ -24,6 +24,18 @@
         <servlet-name>CreateTodo</servlet-name>
         <servlet-class>servlets.CreateTodo</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Home</servlet-name>
+        <servlet-class>servlets.Home</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>View_Todo</servlet-name>
+        <servlet-class>servlets.View_Todo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Delete_Todo</servlet-name>
+        <servlet-class>servlets.Delete_Todo</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.htm</url-pattern>
@@ -39,6 +51,18 @@
     <servlet-mapping>
         <servlet-name>CreateTodo</servlet-name>
         <url-pattern>/CreateTodo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Home</servlet-name>
+        <url-pattern>/Home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>View_Todo</servlet-name>
+        <url-pattern>/View_Todo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Delete_Todo</servlet-name>
+        <url-pattern>/Delete_Todo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
