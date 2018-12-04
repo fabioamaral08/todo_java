@@ -4,6 +4,7 @@
     Author     : Gi
 --%>
 
+<%@page import="java.text.DateFormat"%>
 <%@page import="model.Users"%>
 <%@page import="model.Todo"%>
 <%@page import="java.util.ArrayList"%>
@@ -22,13 +23,15 @@
     </tr>
 
     <% ArrayList<Todo> todo_list = (ArrayList) request.getAttribute("list_todo"); %>
-    <% SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy"); %>
+    <% DateFormat df = new SimpleDateFormat("dd/MM/yyyy"); %>
     <% for (Todo t : todo_list) {%>
     <tr>
         <td> <%= t.getName()%></td>
         <td> <%= t.getCat()%></td>
         <td> <%= t.getPriority()%></td>
-        <td> <%= df.format(t.getDeadline())%></td>
+        <td> <% if (t.getDeadline() != null) {%>
+            <%= df.format((Date) t.getDeadline())%>
+            <% }%></td>
         <td> <a href=<%= "View_Todo?Todo_ID=" + t.getId()%>>Ver detalhes</a>
             <a href=<%= "Delete_Todo?Todo_ID=" + t.getId()%>>Excluir</a></td>
     </tr>

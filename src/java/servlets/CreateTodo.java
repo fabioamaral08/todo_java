@@ -80,7 +80,7 @@ public class CreateTodo extends HttpServlet {
         todo.setPriority(priority);
         todo.setName(name);
         if (c.todoPersist(todo)) {
-                request.setAttribute("page", "home");
+                request.setAttribute("page", "view_todo");
                 request.setAttribute("list_todo",c.allToDos((Users)session.getAttribute("user")));
                 request.getRequestDispatcher("index.htm").forward(request, response);
         } else {
