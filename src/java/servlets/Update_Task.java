@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import controller.Controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -71,6 +72,14 @@ public class Update_Task extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String[] checks = request.getParameterValues("check");
+        Controller c = new Controller();
+        
+        for (String check: checks){
+            if (check != null) {
+                c.updateTask(check);
+            }
+            
+        }
     }
 
     /**

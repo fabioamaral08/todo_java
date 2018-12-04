@@ -33,7 +33,7 @@
             <%= df.format((Date) t.getDeadline())%>
             <% }%></td>
         <td> <a href=<%= "View_Todo?Todo_ID=" + t.getId()%>>Ver detalhes</a>
-            <a href=<%= "Delete_Todo?Todo_ID=" + t.getId()%>>Excluir</a></td>
+            <a href=<%= "Delete_Todo?Todo_ID=" + t.getId()%>>Deletar</a></td>
     </tr>
     <% }%>
 

@@ -19,6 +19,7 @@
         <tr>
             <th>Tarefa</th>
             <th>Situação</th> 
+            <th>Deletar</th> 
         </tr>
         <tr>
             <% ArrayList<Task> tasks = (ArrayList) request.getAttribute("tasks");
@@ -26,10 +27,11 @@
             <% for (Task task : tasks) {%>
             <td> <%= task.getDescription()%></td>
             <% if (task.isDone()) {%>
-            <td> <input type="checkbox" checked="true" name="check" value=<%= task.getId() %> ></td>
+            <td> <input type="checkbox" checked="true" name="check" disabled="true" value=<%= task.getId() %> ></td>
                 <% } else {%>
-            <td> <input type="checkbox" name="check" value="<%= task.getId() %>" ></td>                
+            <td> <input type="checkbox" name="check"  value="<%= task.getId() %>" ></td>                
                 <% }%>
+            <td><a href=<%= "Update_Task?Task_ID=" + t.getId()%>>Deletar</a></td></td>
                 <% }%>
         </tr>
 
