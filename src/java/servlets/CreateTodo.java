@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Servlet que trata a criação de um novo To Do
  */
 package servlets;
 
@@ -80,10 +78,12 @@ public class CreateTodo extends HttpServlet {
         todo.setPriority(priority);
         todo.setName(name);
         if (c.todoPersist(todo)) {
-                response.sendRedirect("View_Todo?Todo_ID=" + todo.getId());
+
+
+               response.sendRedirect("View_Todo?Todo_ID=" + todo.getId());
         } else {
-            request.setAttribute("page", "error_signup");
-            request.getRequestDispatcher("error.jsp").forward(request, response);
+            request.setAttribute("page", "error");
+            request.getRequestDispatcher("index.htm").forward(request, response);
         }
 
     }

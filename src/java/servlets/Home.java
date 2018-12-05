@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Servlet que trata a página inicial do site caso um usuário esteja logado ou não
  */
 package servlets;
 
@@ -36,7 +34,7 @@ public class Home extends HttpServlet {
         Controller control = new Controller();
         if (s.getAttribute("user") != null) {
             request.setAttribute("page", "home");
-            request.setAttribute("list_todo", control.allToDos((Users)s.getAttribute("user")));
+            request.setAttribute("list_todo", control.allToDos((Users) s.getAttribute("user")));
         } else {
             request.setAttribute("page", "login");
         }
@@ -45,6 +43,8 @@ public class Home extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setAttribute("page", "error");
+        request.getRequestDispatcher("index.htm").forward(request, response);
     }
 
     /**

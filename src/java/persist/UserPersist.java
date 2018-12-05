@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *Classe que trata a persintência de um Usuário
  */
 package persist;
 
@@ -22,6 +20,12 @@ public class UserPersist {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("TODO_ListPU");
 
+    /**
+     * Trata a persistência de um usuário no Banco de Dados
+     * 
+     * @param user User 
+     * @return 
+     */
     public boolean persist(Users user) {
         EntityManager em = emf.createEntityManager();
         boolean commited;
@@ -40,6 +44,13 @@ public class UserPersist {
         return commited;
     }
 
+    /**
+     * Verifica os dados fornecidos no login 
+     * 
+     * @param login String email
+     * @param password String senha
+     * @return User
+     */
     public Users verifyUser(String login, String password) {
         EntityManager em = emf.createEntityManager();
         Query q = em.createQuery("SELECT u FROM Users u WHERE login = :login AND password = :password");

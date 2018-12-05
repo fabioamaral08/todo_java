@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Servlet que trata a exclusão de um To Do
  */
 package servlets;
 
@@ -21,8 +19,6 @@ import model.Users;
  */
 public class Delete_Todo extends HttpServlet {
 
-    
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -40,13 +36,13 @@ public class Delete_Todo extends HttpServlet {
         todo.setId(Long.parseLong(id));
         Controller c = new Controller();
         HttpSession session = request.getSession();
-        if(c.deleteTodo(todo)){
+        if (c.deleteTodo(todo)) {
             request.setAttribute("page", "home");
-            request.setAttribute("list_todo",c.allToDos((Users)session.getAttribute("user")));
+            request.setAttribute("list_todo", c.allToDos((Users) session.getAttribute("user")));
             request.getRequestDispatcher("index.htm").forward(request, response);
-        }else{
-            request.setAttribute("page", "error_deleteTodo");
-            request.getRequestDispatcher("error.jsp").forward(request, response);
+        } else {
+            request.setAttribute("page", "error");
+            request.getRequestDispatcher("index.htm").forward(request, response);
         }
     }
 
@@ -61,6 +57,8 @@ public class Delete_Todo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setAttribute("page", "error");
+        request.getRequestDispatcher("index.htm").forward(request, response);
     }
 
     /**

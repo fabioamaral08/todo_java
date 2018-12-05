@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Servlet que trata o cadastro de novos usuários
  */
 package servlets;
 
@@ -49,8 +47,8 @@ public class Casdastro extends HttpServlet {
             request.setAttribute("page", "home");
             request.getRequestDispatcher("index.htm").forward(request, response);
         } else {
-            request.setAttribute("page", "error_signup");
-            request.getRequestDispatcher("error.jsp").forward(request, response);
+            request.setAttribute("page", "error");
+            request.getRequestDispatcher("index.htm").forward(request, response);
         }
     }
 
