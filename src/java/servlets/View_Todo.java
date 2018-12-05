@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Servlet que trata a visualização de um To Do
  */
 package servlets;
 
@@ -57,6 +55,8 @@ public class View_Todo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setAttribute("page", "error");
+        request.getRequestDispatcher("index.htm").forward(request, response);
     }
 
     /**

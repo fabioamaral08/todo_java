@@ -32,7 +32,7 @@
                     <% } else {%>
                 <td> <input type="checkbox" name="check"  value="<%= task.getId()%>" ></td>                
                     <% }%>
-                <td><a href=<%= "Update_Task?Task_ID=" + task.getId() + "&Todo_ID=" + task.getId()%>>Deletar</a></td></td>
+                <td><a href=<%= "Update_Task?Task_ID=" + task.getId() + "&Todo_ID=" + t.getId()%>>Deletar</a></td></td>
                 <% }%>
             </tr>
 

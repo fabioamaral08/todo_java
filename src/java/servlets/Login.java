@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Servlet que trata o login de um usuário
  */
 package servlets;
 
@@ -20,8 +18,6 @@ import model.Users;
  * @author Gustavo Gimenez
  */
 public class Login extends HttpServlet {
-
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -58,8 +54,8 @@ public class Login extends HttpServlet {
 
         Users u = c.login(request.getParameter("login"), request.getParameter("password"));
         if (u == null) {
-            request.setAttribute("page", "error_login");
-            request.getRequestDispatcher("error.jsp").forward(request, response);
+            request.setAttribute("page", "error");
+            request.getRequestDispatcher("index.htm").forward(request, response);
         } else {
             request.setAttribute("page", "home");
             HttpSession hs = request.getSession(true);

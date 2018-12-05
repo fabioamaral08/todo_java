@@ -32,6 +32,8 @@
         <jsp:include page="new_todo.jsp" />
         <% } else if (pag.equals("view_todo")) { %>
         <jsp:include page="view_todo.jsp" />
+        <% } else if (pag.equals("error")) { %>
+        <jsp:include page="error.jsp" />
         <% } else { %>
         <jsp:include page="login.jsp" />
         <% }%>
