@@ -15,7 +15,7 @@
     <label>Prioridade</label>
     <select name="priority" id="priority">
         <option value="Alta">Alta</option>
-        <option value="Média">Média</option>
+        <option value="Media">Média</option>
         <option value="Baixa">Baixa</option>
     </select>     
     <label>Prazo</label>

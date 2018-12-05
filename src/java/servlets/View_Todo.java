@@ -10,8 +10,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.Task;
 import model.Todo;
+import model.Users;
 
 /**
  *
@@ -31,10 +33,18 @@ public class View_Todo extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("user") == null) {
+            response.sendRedirect("Login");
+            return;
+        }
         String id = request.getParameter("Todo_ID");
         Controller c = new Controller();
         Todo todo = c.getTodo(id);
-
+        if (!((Users) session.getAttribute("user")).getId().equals(todo.getOwner().getId())) {
+            response.sendRedirect("Home");
+            return;
+        }
         List<Task> tasks = c.allTasks(id);
 
         request.setAttribute("tasks", tasks);

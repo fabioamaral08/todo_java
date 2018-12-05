@@ -8,7 +8,6 @@
 <!DOCTYPE html>
 <div class="navbar">
     <% if (session.getAttribute("user") == null) { %>
-    <a href="Login">Home</a>
     <a href="Login">Login</a>
     <a href="Cadastro">Cadastrar</a>
     <% } else {%>

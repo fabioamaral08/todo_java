@@ -19,7 +19,6 @@ import model.Todo;
  * @author Gi
  */
 public class Update_Task extends HttpServlet {
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -36,15 +35,10 @@ public class Update_Task extends HttpServlet {
         Controller c = new Controller();
         String id = request.getParameter("Task_ID");
         String idTodo = request.getParameter("Todo_ID");
-        Todo todo = c.getTodo(idTodo);
-        List<Task> tasks = c.allTasks(idTodo);
 
         c.deleteTask(id);
-        
-        request.setAttribute("tasks", tasks);
-        request.setAttribute("todo", todo);
-        request.setAttribute("page", "view_todo");
-        request.getRequestDispatcher("index.htm").forward(request, response);
+
+        response.sendRedirect("View_Todo?Todo_ID=" + idTodo);
 
     }
 
@@ -60,18 +54,17 @@ public class Update_Task extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Controller c = new Controller();
-        
+
         String[] checks = request.getParameterValues("check");
         String idTodo = request.getParameter("id_todo");
         Todo todo = c.getTodo(idTodo);
-        
 
         for (String check : checks) {
             if (check != null) {
                 c.updateTask(check);
             }
         }
-        
+
         List<Task> tasks = c.allTasks(idTodo);
         request.setAttribute("tasks", tasks);
         request.setAttribute("todo", todo);

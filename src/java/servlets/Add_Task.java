@@ -21,7 +21,6 @@ import model.Todo;
 public class Add_Task extends HttpServlet {
 
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -35,6 +34,7 @@ public class Add_Task extends HttpServlet {
             throws ServletException, IOException {
         request.setAttribute("page", "error");
         request.getRequestDispatcher("index.htm").forward(request, response);
+
     }
 
     /**
@@ -54,18 +54,15 @@ public class Add_Task extends HttpServlet {
         String desc = request.getParameter("desc");
         String id = request.getParameter("id_todo");
 
+        System.out.println(id);
         Todo todo = c.getTodo(id);
 
         Task task = new Task();
         task.setDescription(desc);
         task.setTodo(todo);
-
         if (c.addTask(task)) {
-            List<Task> tasks = c.allTasks(id);
-            request.setAttribute("tasks", tasks);
-            request.setAttribute("page", "view_todo");
-            request.setAttribute("todo", todo);
-            request.getRequestDispatcher("index.htm").forward(request, response);
+            response.sendRedirect("View_Todo?Todo_ID=" + todo.getId());
+            
         } else {
             request.setAttribute("page", "erro");
             request.getRequestDispatcher("index.htm").forward(request, response);

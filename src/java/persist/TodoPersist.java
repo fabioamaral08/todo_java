@@ -138,6 +138,7 @@ public class TodoPersist {
         em.getTransaction().begin();
         q.executeUpdate();
         em.getTransaction().commit();
+        em.close();
     }
     
     /**
@@ -197,7 +198,7 @@ public class TodoPersist {
      * 
      * @param idTask Long id da Task
      */
-    public void updateTask(Long idTask){
+
         EntityManager em = emf.createEntityManager();
         Query q = em.createQuery("UPDATE Task t SET done = true WHERE id = :idTask");
         q.setParameter("idTask", idTask);
@@ -213,6 +214,7 @@ public class TodoPersist {
             em.close();
         }
     }
+
     
     /**
      * Deleta uma Task do Banco de Dados
@@ -220,6 +222,7 @@ public class TodoPersist {
      * @param idTask Long id da Task
      */    
     public void deleteTask(Long idTask){
+
         EntityManager em = emf.createEntityManager();
         Query q = em.createQuery("DELETE FROM Task WHERE id = :idTask");
         q.setParameter("idTask", idTask);
