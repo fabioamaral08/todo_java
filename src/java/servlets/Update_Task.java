@@ -22,32 +22,6 @@ import model.Todo;
  */
 public class Update_Task extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Update_Task</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Update_Task at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -63,15 +37,10 @@ public class Update_Task extends HttpServlet {
         Controller c = new Controller();
         String id = request.getParameter("Task_ID");
         String idTodo = request.getParameter("Todo_ID");
-        Todo todo = c.getTodo(idTodo);
-        List<Task> tasks = c.allTasks(idTodo);
 
         c.deleteTask(id);
-        
-        request.setAttribute("tasks", tasks);
-        request.setAttribute("todo", todo);
-        request.setAttribute("page", "view_todo");
-        request.getRequestDispatcher("index.htm").forward(request, response);
+
+        response.sendRedirect("View_Todo?Todo_ID=" + idTodo);
 
     }
 
@@ -87,18 +56,17 @@ public class Update_Task extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Controller c = new Controller();
-        
+
         String[] checks = request.getParameterValues("check");
         String idTodo = request.getParameter("id_todo");
         Todo todo = c.getTodo(idTodo);
-        
 
         for (String check : checks) {
             if (check != null) {
                 c.updateTask(check);
             }
         }
-        
+
         List<Task> tasks = c.allTasks(idTodo);
         request.setAttribute("tasks", tasks);
         request.setAttribute("todo", todo);

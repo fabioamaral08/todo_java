@@ -58,15 +58,13 @@ public class Login extends HttpServlet {
 
         Users u = c.login(request.getParameter("login"), request.getParameter("password"));
         if (u == null) {
-            request.setAttribute("page", "error_login");
-            request.getRequestDispatcher("error.jsp").forward(request, response);
+            
+            response.sendRedirect("Login");
         } else {
             request.setAttribute("page", "home");
             HttpSession hs = request.getSession(true);
-            List allTodo = c.allToDos(u);
-            request.setAttribute("list_todo", allTodo);
             hs.setAttribute("user", u);
-            request.getRequestDispatcher("index.htm").forward(request, response);
+            response.sendRedirect("Home");
         }
     }
 }

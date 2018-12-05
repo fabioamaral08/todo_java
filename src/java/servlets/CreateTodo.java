@@ -80,9 +80,7 @@ public class CreateTodo extends HttpServlet {
         todo.setPriority(priority);
         todo.setName(name);
         if (c.todoPersist(todo)) {
-                request.setAttribute("page", "view_todo");
-                request.setAttribute("list_todo",c.allToDos((Users)session.getAttribute("user")));
-                request.getRequestDispatcher("index.htm").forward(request, response);
+                response.sendRedirect("View_Todo?Todo_ID=" + todo.getId());
         } else {
             request.setAttribute("page", "error_signup");
             request.getRequestDispatcher("error.jsp").forward(request, response);
