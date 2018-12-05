@@ -5,14 +5,10 @@ package servlets;
 
 import controller.Controller;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Task;
-import model.Todo;
 
 /**
  *
@@ -57,7 +53,6 @@ public class Update_Task extends HttpServlet {
 
         String[] checks = request.getParameterValues("check");
         String idTodo = request.getParameter("id_todo");
-        Todo todo = c.getTodo(idTodo);
 
         if (checks == null) {
             request.setAttribute("page", "error");
@@ -68,13 +63,8 @@ public class Update_Task extends HttpServlet {
                     c.updateTask(check);
                 }
             }
-
-            List<Task> tasks = c.allTasks(idTodo);
-            request.setAttribute("tasks", tasks);
-            request.setAttribute("todo", todo);
-            request.setAttribute("page", "view_todo");
         }
-        request.getRequestDispatcher("index.htm").forward(request, response);
+        response.sendRedirect("View_Todo?Todo_ID=" + idTodo);
     }
 
     /**
