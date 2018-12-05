@@ -24,9 +24,10 @@ public class TodoPersist {
 
     /**
      * Faz a persistencia no Banco de Dados de um objeto Todo
-     * 
+     *
      * @param todo Todo
-     * @return boolean true se a operação foi realizada com sucesso, false caso contrário
+     * @return boolean true se a operação foi realizada com sucesso, false caso
+     * contrário
      */
     public boolean persist(Todo todo) {
         EntityManager em = emf.createEntityManager();
@@ -45,14 +46,13 @@ public class TodoPersist {
         }
         return commited;
     }
-    
+
     /**
      * Busca no Banco de Dados todos os Todos de um usuário
-     * 
+     *
      * @param idUser String id do usuário
      * @return List lista de objetos Todo
      */
-
     public List getAll(String idUser) {
         EntityManager em = emf.createEntityManager();
         Query q = em.createQuery("SELECT td FROM Todo td WHERE owner_id = :idUser");
@@ -74,6 +74,7 @@ public class TodoPersist {
 
     /**
      * Busca no Banco de Dados um Todo específico
+     *
      * @param id String id do Todo
      * @return Todo
      */
@@ -102,11 +103,13 @@ public class TodoPersist {
         }
         return t;
     }
-    
+
     /**
-     * Faz a persistência de uma Task no Banco de Dados 
+     * Faz a persistência de uma Task no Banco de Dados
+     *
      * @param task Task
-     * @return boolean true se a operação foi realizada com sucesso, false caso contrário
+     * @return boolean true se a operação foi realizada com sucesso, false caso
+     * contrário
      */
     public boolean addTask(Task task) {
         EntityManager em = emf.createEntityManager();
@@ -125,10 +128,10 @@ public class TodoPersist {
         }
         return commited;
     }
-    
+
     /**
      * Deleta todas as Tasks de um Todo no Banco de Dados
-     * 
+     *
      * @param todo Todo
      */
     public void deleteAllTask(Todo todo) {
@@ -140,12 +143,12 @@ public class TodoPersist {
         em.getTransaction().commit();
         em.close();
     }
-    
+
     /**
      * Deleta um Todo do Banco de Dados
-     * 
+     *
      * @param todo Todo
-     * @return 
+     * @return
      */
     public boolean deleteTodo(Todo todo) {
         EntityManager em = emf.createEntityManager();
@@ -170,9 +173,9 @@ public class TodoPersist {
 
     /**
      * Busca no Banco de Dados todos as Tasks de um Todo
-     * 
+     *
      * @param id_todo String id do Todo
-     * @return 
+     * @return
      */
     public List getTasks(String id_todo) {
         EntityManager em = emf.createEntityManager();
@@ -192,13 +195,13 @@ public class TodoPersist {
         }
         return result;
     }
-    
+
     /**
      * Atualiza os dados de uma Task no Banco de Dados
-     * 
+     *
      * @param idTask Long id da Task
      */
-
+    public void updateTask(Long idTask) {
         EntityManager em = emf.createEntityManager();
         Query q = em.createQuery("UPDATE Task t SET done = true WHERE id = :idTask");
         q.setParameter("idTask", idTask);
@@ -215,13 +218,12 @@ public class TodoPersist {
         }
     }
 
-    
     /**
      * Deleta uma Task do Banco de Dados
-     * 
+     *
      * @param idTask Long id da Task
-     */    
-    public void deleteTask(Long idTask){
+     */
+    public void deleteTask(Long idTask) {
 
         EntityManager em = emf.createEntityManager();
         Query q = em.createQuery("DELETE FROM Task WHERE id = :idTask");

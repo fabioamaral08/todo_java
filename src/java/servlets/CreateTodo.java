@@ -78,9 +78,7 @@ public class CreateTodo extends HttpServlet {
         todo.setPriority(priority);
         todo.setName(name);
         if (c.todoPersist(todo)) {
-
-
-               response.sendRedirect("View_Todo?Todo_ID=" + todo.getId());
+            response.sendRedirect("View_Todo?Todo_ID=" + todo.getId());
         } else {
             request.setAttribute("page", "error");
             request.getRequestDispatcher("index.htm").forward(request, response);

@@ -59,16 +59,21 @@ public class Update_Task extends HttpServlet {
         String idTodo = request.getParameter("id_todo");
         Todo todo = c.getTodo(idTodo);
 
-        for (String check : checks) {
-            if (check != null) {
-                c.updateTask(check);
-            }
-        }
+        if (checks == null) {
+            request.setAttribute("page", "error");
+        } else {
 
-        List<Task> tasks = c.allTasks(idTodo);
-        request.setAttribute("tasks", tasks);
-        request.setAttribute("todo", todo);
-        request.setAttribute("page", "view_todo");
+            for (String check : checks) {
+                if (check != null) {
+                    c.updateTask(check);
+                }
+            }
+
+            List<Task> tasks = c.allTasks(idTodo);
+            request.setAttribute("tasks", tasks);
+            request.setAttribute("todo", todo);
+            request.setAttribute("page", "view_todo");
+        }
         request.getRequestDispatcher("index.htm").forward(request, response);
     }
 
